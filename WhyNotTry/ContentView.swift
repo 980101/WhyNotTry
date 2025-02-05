@@ -9,17 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var activities = ["Archery", "Baseball", "Basketball", "Bowling", "Boxing", "Cricket"]
+    var colors: [Color] = [.blue, .cyan, .gray, .green, .indigo, .mint, .orange]
     
-    @State var selected = "Baseball"
+    @State private var selected = "Baseball"
     
     var body: some View {
         VStack {
             Text("Why not try...")
                 .font(.largeTitle.bold())
             
+            Spacer()
+            
             VStack {
                 Circle()
-                    .fill(.blue)
+                    .fill(colors.randomElement() ?? .blue)
                     .padding()
                     .overlay(
                         Image(systemName: "figure.\(selected.lowercased())")
@@ -30,6 +33,8 @@ struct ContentView: View {
                 Text("\(selected)!")
                     .font(.title)
             }
+            
+            Spacer()
             
             Button("Try again") {
                 selected = activities.randomElement() ?? "Archery"
