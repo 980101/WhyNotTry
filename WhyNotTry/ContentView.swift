@@ -8,15 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    var activities = ["Archery", "Baseball", "Basketball", "Bowling", "Boxing", "Cricket"]
+    
+    @State var selected = "Baseball"
+    
     var body: some View {
-        Circle()
-            .fill(.blue)
-            .padding()
-            .overlay(
-                Image(systemName: "figure.archery")
-                    .font(.system(size: 144))
-                    .foregroundStyle(.white)
-            )
+        VStack {
+            Text("Why not try...")
+                .font(.largeTitle.bold())
+            
+            VStack {
+                Circle()
+                    .fill(.blue)
+                    .padding()
+                    .overlay(
+                        Image(systemName: "figure.\(selected.lowercased())")
+                            .font(.system(size: 144))
+                            .foregroundStyle(.white)
+                    )
+                
+                Text("\(selected)!")
+                    .font(.title)
+            }
+            
+            Button("Try again") {
+                selected = activities.randomElement() ?? "Archery"
+            }
+            .buttonStyle(.borderedProminent)
+        }
     }
 }
 
