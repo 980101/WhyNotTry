@@ -12,6 +12,7 @@ struct ContentView: View {
     var colors: [Color] = [.blue, .cyan, .gray, .green, .indigo, .mint, .orange]
     
     @State private var selected = "Baseball"
+    @State private var id = 1
     
     var body: some View {
         VStack {
@@ -33,12 +34,15 @@ struct ContentView: View {
                 Text("\(selected)!")
                     .font(.title)
             }
+            .transition(.slide)
+            .id(id)
             
             Spacer()
             
             Button("Try again") {
                 withAnimation(.easeInOut(duration: 1)) {
                     selected = activities.randomElement() ?? "Archery"
+                    id += 1
                 }
             }
             .buttonStyle(.borderedProminent)
